@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-02 07:08:17",
+  "source": "hf",
+  "n_images": 600,
+  "quality": 75,
+  "seed": 0,
+  "skipped": [
+    "glass_blur"
+  ],
+  "corruptions": [
+    "gaussian_noise",
+    "shot_noise",
+    "impulse_noise",
+    "defocus_blur",
+    "motion_blur",
+    "zoom_blur",
+    "snow",
+    "frost",
+    "fog",
+    "brightness",
+    "contrast",
+    "elastic_transform",
+    "pixelate",
+    "jpeg_compression"
+  ],
+  "python": "3.13.15",
+  "numpy": "2.1.3",
+  "pandas": "2.2.3",
+  "scipy": "1.16.3",
+  "imagecorruptions": "unknown",
+  "image_ids_sha256": "f1241eaadceb127333e902f7c3183dfd7fbf3d95a946af7d3b634862a688a0c0",
+  "protocol": "proposal_v4_final.md (pilot protocol frozen 2026-10-01)",
+  "evidence_note": "ImageNet-1k validation sample (streamed, shuffled)"
+}
