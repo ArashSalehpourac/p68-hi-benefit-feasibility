@@ -1,0 +1,49 @@
+{
+  "phase": "P68-R6A post-review service-round policy uncertainty sensitivity",
+  "date": "2026-10-05",
+  "status": "PASS_SCALE_INTERPRETATION_UNCHANGED",
+  "confirmatory_analysis_reopened": false,
+  "models_retrained": false,
+  "policy_scores_recomputed": false,
+  "policy_selections_recomputed": false,
+  "deadline_ms": 95.0,
+  "fixed_offload_rate": 0.5,
+  "service_rounds": 5,
+  "service_construction": "same model-specific JPEG payload-size-decile empirical service CDF, restricted to each sustained-warm measurement round",
+  "point_estimand": "round-standardized expected joint-minus-factorized deadline-adjusted accuracy with frozen held-out selections",
+  "bootstrap": {
+    "reps": 2000,
+    "seed": 6862,
+    "clusters": ["image_id", "trace_block", "service_round"],
+    "scheme": "independent with-replacement cluster multiplicities; service-round multiplicities averaged over five draws"
+  },
+  "input_sha256": {
+    "r3b_oof_policy_rows_parquet": "96213eb8430031be68191bf1c90bda7d5a24a7bc710959af0bd85cce1bdd4c82",
+    "pam_trace": "270194e69c6b68b487d4529a9cf648a66a347e62393964c9119ff971b1658194",
+    "service_raw": "bb5f71414744b125345ebb7a195e82ffaa481b935d67f86f44a06a3a0cbcd869"
+  },
+  "qstar_reconstruction_max_abs_error": 1.1359944063205063e-07,
+  "results": {
+    "A": {
+      "original_realized_delta_pp": 0.37346153846153846,
+      "pooled_service_round_standardized_delta_pp": 0.37903942294182397,
+      "three_way_ci_lo_pp": 0.24374455944250287,
+      "three_way_ci_hi_pp": 0.5231125310018051,
+      "round_specific_delta_pp": [0.3873289227485657, 0.3841923475265503, 0.3695308566093445, 0.3783165216445923, 0.375828355550766],
+      "inside_0_5pp_margin": false,
+      "inside_1pp_margin": true,
+      "inside_2pp_margin": true
+    },
+    "B": {
+      "original_realized_delta_pp": 0.5775,
+      "pooled_service_round_standardized_delta_pp": 0.5746107233287766,
+      "three_way_ci_lo_pp": 0.40028661304924057,
+      "three_way_ci_hi_pp": 0.7608974685965472,
+      "round_specific_delta_pp": [0.5774290561676025, 0.5762876868247986, 0.5774616003036499, 0.5603530406951904, 0.5815222263336182],
+      "inside_0_5pp_margin": false,
+      "inside_1pp_margin": true,
+      "inside_2pp_margin": true
+    }
+  },
+  "interpretation": "Finite sustained-warm service-round sampling does not materially alter the joint-minus-factorized policy contrast. Both three-way sensitivity intervals remain inside ±1 pp and the original ±2 pp operational-equivalence margin; neither is wholly inside ±0.5 pp. This is a post-review sensitivity and does not replace or reopen the pre-specified two-way confirmatory bootstrap."
+}
