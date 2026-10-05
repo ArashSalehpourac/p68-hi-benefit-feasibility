@@ -1,57 +1,66 @@
-# P68-R6A — Post-review service-round policy uncertainty sensitivity
+# P68-R6A — Service-round policy uncertainty sensitivity
 
 Date: 2026-10-05  
-Status: **PASS — scale interpretation unchanged**
+Status: **PASS — RESULTS READY FOR MANUSCRIPT**
 
 ## Purpose
 
-A referee identified an uncertainty asymmetry: the mechanism robustness analysis resampled remote-service measurement rounds, while the headline policy comparison used the pre-specified paired two-way image-ID × trace-block bootstrap. R6A addresses that point without reopening the confirmatory analysis.
+Close the post-review uncertainty asymmetry between the three-way mechanism robustness analysis and the headline two-way policy bootstrap, without reopening the frozen confirmatory analysis.
 
-## Frozen inputs and non-changes
+## Frozen inputs and scope
 
-- PAM deadline: 95 ms.
-- Held-out factorized/joint policy scores and 50% top-K selections are reused unchanged.
-- No model is retrained.
-- No policy threshold, fold, margin, endpoint, or confirmatory decision rule is changed.
-- The same model-specific JPEG payload-size-decile service construction is used.
-- Five sustained-warm service rounds are treated as the finite service-measurement clusters.
+- Confirmatory R3B trained models, held-out rankings, folds, replay assignments, and validation-selected 50% boundary selections are reused unchanged.
+- No policy model is retrained.
+- Primary deadline: 95 ms.
+- Five sustained-warm remote-service measurement rounds.
+- The archived pooled payload-decile empirical service CDF was reconstructed exactly from the frozen JPEG service corpus; maximum absolute error versus stored q-star = 0.
+- This is an **evaluation-side service-measurement sensitivity**. It does not claim model-refit sensitivity to alternative service-round training targets.
 
-Input SHA-256:
+Source SHA-256:
 - R3B held-out policy rows: `96213eb8430031be68191bf1c90bda7d5a24a7bc710959af0bd85cce1bdd4c82`
 - PAM trace: `270194e69c6b68b487d4529a9cf648a66a347e62393964c9119ff971b1658194`
-- Sustained-warm service raw: `bb5f71414744b125345ebb7a195e82ffaa481b935d67f86f44a06a3a0cbcd869`
+- sustained-warm service corpus: `bb5f71414744b125345ebb7a195e82ffaa481b935d67f86f44a06a3a0cbcd869`
+- frozen inference-side table: `d1084d9d1308aeee10b55fc8ab80c982a9a980020ad3eedcf4563d4c6e2f2dd9`
 
-The stored empirical q-star values were reconstructed from the five-round payload-decile service CDF with maximum absolute error `1.14e-7`.
+## Service-round point sensitivity
 
-## Estimand and uncertainty
+Holding trained policies and selections fixed:
 
-For each held-out row and each service round, deadline feasibility is recomputed from the empirical service CDF restricted to that round. The round-standardized point estimate averages the five round-specific expected deadline-success probabilities while keeping the frozen policy selections fixed.
+- Pair A joint−factorized contrast across rounds: **+0.3695 to +0.3873 pp**.
+- Pair B: **+0.5604 to +0.5815 pp**.
 
-A 2,000-replicate three-way sensitivity independently resamples:
-1. image ID;
-2. measured trace block;
-3. service round.
+For reference, the original realized-binary R3B effects are +0.3735 pp and +0.5775 pp.
 
-Bootstrap seed: `6862`.
+## Three-way bootstrap
 
-This is a post-confirmatory sensitivity. It supplements, but does not replace, the original two-way confirmatory bootstrap.
+2,000 replicates independently resample:
+1. image ID,
+2. measured trace block,
+3. service measurement round.
 
-## Results
+Seeds: 6870 (A), 6871 (B).
 
-Pair A:
-- original realized joint−factorized: **+0.3735 pp**;
-- service-round standardized: **+0.3790 pp**;
-- three-way 95% interval: **[+0.2437,+0.5231] pp**;
-- individual service-round effects: **+0.3695 to +0.3873 pp**.
+- Pair A: mean +0.3780 pp; **95% CI [+0.2522,+0.5183] pp**.
+- Pair B: mean +0.5732 pp; **95% CI [+0.3963,+0.7487] pp**.
 
-Pair B:
-- original realized joint−factorized: **+0.5775 pp**;
-- service-round standardized: **+0.5746 pp**;
-- three-way 95% interval: **[+0.4003,+0.7609] pp**;
-- individual service-round effects: **+0.5604 to +0.5815 pp**.
+Both intervals remain positive and wholly inside the original prespecified ±2-pp operational margin.
 
-Both three-way intervals remain wholly inside ±1 pp and the original ±2-pp operational-equivalence margin. Neither lies wholly inside ±0.5 pp.
+## Worst-class-tail sensitivity
+
+Using the frozen tail definitions and frozen factorized-to-oracle headroom:
+
+- Pair A: three-way 95% recovery interval **[1.46%,17.30%]**.
+- Pair B: **[1.01%,18.36%]**.
+
+Both upper bounds remain below the frozen 20% material-tail rule.
 
 ## Decision
 
-Finite sustained-warm service-round sampling does **not** materially change the policy-scale interpretation. The referee-requested uncertainty sensitivity is therefore closed without changing the confirmatory result or claim boundary.
+The service-round policy sensitivity **preserves the original operational interpretation**. Finite service-measurement sampling does not materially alter the joint−factorized contrast or the frozen tail decision under the evaluation-side sensitivity.
+
+## Artifact hashes
+
+- `R6A_SERVICE_ROUND_POLICY_SENSITIVITY.csv`: `19a1d7954312eda752e58323a95e8fb9b4f68d7e0f3540d410ae9aed594f1d61`
+- `R6A_THREE_WAY_BOOTSTRAP_SUMMARY.csv`: `53cf5867556fd3e3b8c618218bb922adb8ef8b06c4745ad4341f195ac3bb92fc`
+- `R6A_DECISION.json`: `b9319b7b1a9716f04312430285d76fc1a31575fdb6762852da462de042de4853`
+- `README.md`: `ef1c90658d555b21d0f03409c4595c9780a847c95cdcac0e791f6000a2fc427b`
